@@ -2,9 +2,8 @@ asciSumHash <-function(string){
   return(sum(utf8ToInt(string)))
 }
 
-largePrimeHash <-function(string){
+largePrimeHash <-function(string, c = 101){
   n <- nchar(string)
-  c <- 101
   code <- utf8ToInt(string)
   hash <- 0
   for(i in 1 : n){
