@@ -9,11 +9,3 @@ largePrimeHash <-function(string, c = 101){
 
   return(sum(hash))
 }
-
-largePrimeHashTable <-function(string, c = 101){
-  n <- nchar(string)
-  code <- utf8ToInt(string)
-  hash <- (c ^ ((n-1) : 0)) * utf8ToInt(string)
-  
-  return(hash)
-}
