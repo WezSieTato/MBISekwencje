@@ -14,8 +14,10 @@ rabinakarpa <- function(s, w){
     if(i > 1){
       Hs <- ((c * (Hs - codeN[i - 1])) + code[i + m - 1])
     }
-    if(Hs == Hw && pS == w){
+    if(Hs == Hw){
+      if(pS == w){
         return(i)
+     }
     }
   }
   return(0)
