@@ -113,13 +113,31 @@ histTestMethods <- function(n, m, t, numberOfMethod = 5) {
   for(i in 1:t) {
     vec[i,] <- testMethods(n, m)
   }
-  s = c("Naiwny tablicowy", 
+  names <- c("Naiwny tablicowy", 
         "Naiwny string", 
         "Rabina Karpa", 
-        "Knutha Morissona Pratta", 
-        "Rabina Karpa s??aby hash")
+        "Knutha Morissa Pratta", 
+        "Rabina Karpa slaby hash")
+  
+  values <- c()
+  
   for(i in 1:ncol(vec)) {
-    hist(vec[,i],main = s[i])
+    hist(vec[,i],main = names[i])
+    values[i * 3 - 2] <- min (vec[,i])
+    values[i * 3 - 1] <- mean (vec[,i])
+    values[i * 3 ] <- max (vec[,i])
+    
   }
   
+  namesShort <- c("N-Table", 
+             "N-String", 
+             "RabinaKarpa", 
+             "KnuthaMorissaPratha", 
+             "RK-zly hash")
+  
+  smoke <- matrix(values,ncol = numberOfMethod ,byrow=FALSE)
+  colnames(smoke) <- namesShort
+  rownames(smoke) <- c("min", "average", "max")
+  smoke <- as.table(smoke)
+  return (smoke)
 }
