@@ -44,6 +44,7 @@ testMethods <-function(n, m){
   W <- substr(S, i, i+m-1)
  #   print(S)
 #    print(W)
+  iteration <- 0
 
   c <- c()
   Sc <-strsplit(S, "")[[1]]
@@ -51,17 +52,20 @@ testMethods <-function(n, m){
   t <- system.time({
     naive_table(Sc, Wc)
   })
-  c[1] <- t[[3]];
+  iteration <- iteration + 1
+  c[iteration] <- t[[3]];
 
   t <- system.time({
     naive(S, W)
   })
-  c[2] <- t[[3]];
+ iteration <- iteration + 1
+ c[iteration] <- t[[3]];
 
-#  t <- system.time({
-#    rabinakarpa(S, W)
-#  })
-#  c[3] <- t[[3]];
+  t <- system.time({
+    rabinakarpa(S, W)
+  })
+ iteration <- iteration + 1
+ c[iteration] <- t[[3]];
   
   Sc <-strsplit(S, "")[[1]]
   Wc <- strsplit(W, "")[[1]]
@@ -69,12 +73,14 @@ testMethods <-function(n, m){
   t <- system.time({
     knuthamorissonapratta(Sc, Wc, table)
   })
-  c[4] <- t[[3]];
+  iteration <- iteration + 1
+  c[iteration] <- t[[3]];
 
-#  t <- system.time({
-#    rabinakarpaBadHash(S, W)
-#  })
-#  c[5] <- t[[3]];
+  t <- system.time({
+    rabinakarpaBadHash(S, W)
+  })
+  iteration <- iteration + 1
+  c[iteration] <- t[[3]];
 
   return(c);
 }
@@ -91,3 +97,22 @@ avgTestMethods <-function(n, m, t){
   return(colMeans(vec))
 }
 
+# Funkcja do wyświetlania histagramów
+# n - d??ugo???? sekwencji, kt??ra b??dzie przeszukiwana
+# m - d??ugo???? sekwencji, kt??ra b??dzie szukana
+# t - ilość iteracji
+# numberOfMethod - ilość metod testowanych, musi  się zgadzać z liczbą
+# wykorzystywanych metod w testMethods
+histTestMethods <- function(n, m, t, numberOfMethod = 5) {
+  vec <- matrix( 
+    nrow=t,              # number of rows 
+    ncol=numberOfMethod, # number of columns 
+    byrow = TRUE)
+  for(i in 1:t) {
+    vec[i,] <- testMethods(n, m)
+  }
+  for(i in 1:ncol(vec)) {
+    hist(vec[,i],main = paste("Histogram kolumny i-tej równej: " , i))
+  }
+  
+}
