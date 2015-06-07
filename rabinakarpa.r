@@ -23,6 +23,28 @@ rabinakarpa <- function(s, w){
   return(0)
 }
 
+rabinakarpa2 <- function(s, w){
+  n <- length(s)
+  m <- length(w)
+  hash <- primeHash
+  c <- 7
+  Hw <- hash(w, m, c)
+  Hs <- hash(s, m, c)
+  for( i in 1:(n - m + 1)){
+    pLast <- utf8ToInt(s[i + m - 1])
+    pFirst <- utf8ToInt(s[i])
+    if(i > 1){
+      Hs <- c * Hs - ( c^(m) * pFirst) + pLast;
+    }
+    if(Hs == Hw){
+      if(compareString(s,i, m,w)){
+        return(i)
+      }
+    }
+  }
+  return(0)
+}
+
 rabinakarpaChooseHash <- function(s, w, hash = largePrimeHash){
   n <- nchar(s)
   m <- nchar(w)

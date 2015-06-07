@@ -60,13 +60,15 @@ testMethods <-function(n, m){
   })
  iteration <- iteration + 1
  c[iteration] <- t[[3]];
-
-  t <- system.time({
-    rabinakarpa(S, W)
-  })
- iteration <- iteration + 1
- c[iteration] <- t[[3]];
   
+  Sc <-strsplit(S, "")[[1]]
+  Wc <- strsplit(W, "")[[1]]
+  t <- system.time({
+    rabinakarpa2(Sc, Wc)
+  })
+  iteration <- iteration + 1
+  c[iteration] <- t[[3]];
+
   Sc <-strsplit(S, "")[[1]]
   Wc <- strsplit(W, "")[[1]]
   table <- createprefixsufixtable(Sc)
