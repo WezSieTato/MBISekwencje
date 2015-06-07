@@ -111,8 +111,13 @@ histTestMethods <- function(n, m, t, numberOfMethod = 5) {
   for(i in 1:t) {
     vec[i,] <- testMethods(n, m)
   }
+  s = c("Naiwny tablicowy", 
+        "Naiwny string", 
+        "Rabina Karpa", 
+        "Knutha Morissona Pratta", 
+        "Rabina Karpa s??aby hash")
   for(i in 1:ncol(vec)) {
-    hist(vec[,i],main = paste("Histogram kolumny i-tej równej: " , i))
+    hist(vec[,i],main = s[i])
   }
   
 }
