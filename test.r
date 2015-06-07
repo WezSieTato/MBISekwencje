@@ -38,7 +38,7 @@ avgTestMethod <-function(n, m, t, metod){
 }
 
 
-testMethods <-function(n, m){
+testMethods <-function(n, m, numberOfMethod = 6){
   S <- generateSequence(n)
   i <- sample(n-m,1)
   W <- substr(S, i, i+m-1)
@@ -54,29 +54,41 @@ testMethods <-function(n, m){
   })
   iteration <- iteration + 1
   c[iteration] <- t[[3]];
+  if(iteration  == numberOfMethod)
+      return(c);
 
   t <- system.time({
     naive(S, W)
   })
  iteration <- iteration + 1
  c[iteration] <- t[[3]];
+  if(iteration  == numberOfMethod)
+    return(c);
   
-  Sc <-strsplit(S, "")[[1]]
-  Wc <- strsplit(W, "")[[1]]
-  t <- system.time({
-    rabinakarpa2(Sc, Wc)
-  })
-  iteration <- iteration + 1
-  c[iteration] <- t[[3]];
-
-  Sc <-strsplit(S, "")[[1]]
-  Wc <- strsplit(W, "")[[1]]
   table <- createprefixsufixtable(Sc)
   t <- system.time({
     knuthamorissonapratta(Sc, Wc, table)
   })
   iteration <- iteration + 1
   c[iteration] <- t[[3]];
+  if(iteration  == numberOfMethod)
+    return(c);
+
+  t <- system.time({
+    rabinakarpa(S, W)
+  })
+  iteration <- iteration + 1
+  c[iteration] <- t[[3]];
+  if(iteration  == numberOfMethod)
+   return(c);
+
+  t <- system.time({
+   rabinakarpa_table(Sc, Wc)
+  })
+  iteration <- iteration + 1
+  c[iteration] <- t[[3]];
+  if(iteration  == numberOfMethod)
+   return(c);
 
   t <- system.time({
     rabinakarpaBadHash(S, W)
@@ -84,7 +96,8 @@ testMethods <-function(n, m){
   iteration <- iteration + 1
   c[iteration] <- t[[3]];
 
-  return(c);
+  if(iteration  == numberOfMethod)
+    return(c);
 }
 
 avgTestMethods <-function(n, m, t){
@@ -99,45 +112,49 @@ avgTestMethods <-function(n, m, t){
   return(colMeans(vec))
 }
 
-# Funkcja do wyświetlania histagramów
+# Funkcja do wy??wietlania histagram??w
 # n - d??ugo???? sekwencji, kt??ra b??dzie przeszukiwana
 # m - d??ugo???? sekwencji, kt??ra b??dzie szukana
-# t - ilość iteracji
-# numberOfMethod - ilość metod testowanych, musi  się zgadzać z liczbą
+# t - ilo???? iteracji
+# numberOfMethod - ilo???? metod testowanych, musi  si?? zgadza?? z liczb??
 # wykorzystywanych metod w testMethods
-histTestMethods <- function(n, m, t, numberOfMethod = 5) {
+histTestMethods <- function(n, m, t, numberOfMethod = 6) {
   vec <- matrix( 
     nrow=t,              # number of rows 
     ncol=numberOfMethod, # number of columns 
     byrow = TRUE)
   for(i in 1:t) {
-    vec[i,] <- testMethods(n, m)
+    ve <- testMethods(n, m, numberOfMethod)
+    vec[i,] <- ve
   }
-  names <- c("Naiwny tablicowy", 
-        "Naiwny string", 
-        "Rabina Karpa", 
+  names <- c("Naiwny - wektor", 
+        "Naiwny - ciag znakow", 
         "Knutha Morissa Pratta", 
-        "Rabina Karpa slaby hash")
+        "Rabina Karpa - ciag znakow",
+        "Rabina Karpa - wektor", 
+        "Rabina Karpa sum hash")
   
   values <- c()
   
   for(i in 1:ncol(vec)) {
     hist(vec[,i],main = names[i])
-    values[i * 3 - 2] <- min (vec[,i])
-    values[i * 3 - 1] <- mean (vec[,i])
-    values[i * 3 ] <- max (vec[,i])
+    values[i * 4 - 3] <- min (vec[,i])
+    values[i * 4 - 2] <- mean (vec[,i])
+    values[i * 4 - 1] <- median (vec[,i])
+    values[i * 4 ] <- max (vec[,i])
     
   }
   
   namesShort <- c("N-Table", 
              "N-String", 
-             "RabinaKarpa", 
-             "KnuthaMorissaPratha", 
-             "RK-zly hash")
+             "KMP", 
+             "RK-String", 
+             "RK-Table", 
+             "RK-sum hash")
   
   smoke <- matrix(values,ncol = numberOfMethod ,byrow=FALSE)
-  colnames(smoke) <- namesShort
-  rownames(smoke) <- c("min", "average", "max")
+  colnames(smoke) <- namesShort[1:numberOfMethod]
+  rownames(smoke) <- c("min", "average", "median", "max")
   smoke <- as.table(smoke)
   return (smoke)
 }

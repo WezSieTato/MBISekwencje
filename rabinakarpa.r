@@ -23,7 +23,7 @@ rabinakarpa <- function(s, w){
   return(0)
 }
 
-rabinakarpa2 <- function(s, w){
+rabinakarpa_table <- function(s, w){
   n <- length(s)
   m <- length(w)
   hash <- primeHash
