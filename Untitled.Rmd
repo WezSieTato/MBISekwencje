@@ -1,0 +1,18 @@
+---
+title: "Wyszukiwanie ciagow znak??w testy"
+output: html_document
+---
+
+```{r, echo=FALSE}
+source('test.r')
+```
+
+W tym dokumencie przedstawione s?? pomiary test??w r????nych algorytm??w wyszukiwania ci??g??w znak??w, dla r????nych instancji problemu.
+
+1. D??ugo???? przeszukiwanego ci??gu 1000, d??ugo???? szukanego ci??gu:
+----------
+
+```{r, echo=FALSE}
+histTestMethods(1000, 100, 10);
+```
+
