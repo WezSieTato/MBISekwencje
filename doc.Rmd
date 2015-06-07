@@ -1,0 +1,18 @@
+---
+title: "Wyszukiwanie ciagow znaków testy"
+output: pdf_document
+---
+
+```{r, echo=FALSE}
+source('test.r')
+```
+
+W tym dokumencie przedstawione są pomiary testów różnych algorytmów wyszukiwania ciągów znaków, dla różnych instancji problemu.
+
+1. Długość przeszukiwanego ciągu 1000, długość szukanego ciągu:
+----------
+
+```{r, echo=FALSE}
+histTestMethods(1000, 100, 10);
+```
+
