@@ -1,7 +1,5 @@
-source('prefixsufixtable.r')
-
-knuthamorissonapratta <- function(s, w, presuftable = method1){
-  T <- presuftable(s)
+knuthamorissonapratta <- function(s, w, presuftable){
+  
   n <- length(s)
   m <- length(w)
   i <- 1
@@ -15,8 +13,8 @@ knuthamorissonapratta <- function(s, w, presuftable = method1){
     if(j == m )
       return(i)
     if(j > 0) {
-      i = i + j - T[j]
-      j = T[j]
+      i = i + j - presuftable[j]
+      j = presuftable[j]
     } else {
       i = i + 1
     }

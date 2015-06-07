@@ -2,6 +2,7 @@ source ('generation.r')
 source ('rabinakarpa.r')
 source ('naive.r')
 source('knuthamorissonapratta.r')
+source('prefixsufixtable.r')
 
 #metoda do test??w
 # n - d??ugo???? sekwencji, kt??ra b??dzie przeszukiwana
@@ -43,28 +44,37 @@ testMethods <-function(n, m){
   W <- substr(S, i, i+m-1)
  #   print(S)
 #    print(W)
+
   c <- c()
+  Sc <-strsplit(S, "")[[1]]
+  Wc <- strsplit(W, "")[[1]]
   t <- system.time({
-    naive(S, W)
+    naive_table(Sc, Wc)
   })
   c[1] <- t[[3]];
 
   t <- system.time({
-    rabinakarpa(S, W)
+    naive(S, W)
   })
   c[2] <- t[[3]];
+
+#  t <- system.time({
+#    rabinakarpa(S, W)
+#  })
+#  c[3] <- t[[3]];
   
   Sc <-strsplit(S, "")[[1]]
   Wc <- strsplit(W, "")[[1]]
+  table <- createprefixsufixtable(Sc)
   t <- system.time({
-    knuthamorissonapratta(Sc, Wc)
-  })
-  c[3] <- t[[3]];
-
-  t <- system.time({
-    rabinakarpaBadHash(S, W)
+    knuthamorissonapratta(Sc, Wc, table)
   })
   c[4] <- t[[3]];
+
+#  t <- system.time({
+#    rabinakarpaBadHash(S, W)
+#  })
+#  c[5] <- t[[3]];
 
   return(c);
 }

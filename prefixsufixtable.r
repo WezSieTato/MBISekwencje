@@ -1,4 +1,4 @@
-method1 <- function(sequence){
+createprefixsufixtable <- function(sequence){
   result <- c()
   n <- length(sequence)
   result[1] <- 0
