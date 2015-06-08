@@ -32,9 +32,9 @@ histTestMethods(10000, 1000, 300, 3);
 histTestMethods(10000, 2500, 300, 3);
 ```
 
-3. Długość przeszukiwanego ciągu 100000, długość szukanego ciągu 7500:
+3. Długość przeszukiwanego ciągu 100000, długość szukanego ciągu 5000:
 ----------
 
 ```{r, echo=FALSE}
-histTestMethods(100000, 7500, 300, 3);
+histTestMethods(10000, 7500, 300, 3);
 ```
