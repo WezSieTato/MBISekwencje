@@ -10,10 +10,10 @@ largePrimeHash <-function(string, c = 101){
   return(sum(hash))
 }
 
-primeHash <- function(string, n, c = 31) {
+primeHash <- function(table, n, c = 31) {
   hash <- 0
   for(i in 1:n) {
-    hash <- 31*hash + utf8ToInt(string[i])
+    hash <- c*hash + utf8ToInt(table[i])
   }
   return(hash)
 }

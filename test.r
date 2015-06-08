@@ -100,10 +100,10 @@ testMethods <-function(n, m, numberOfMethod = 6){
     return(c);
 }
 
-avgTestMethods <-function(n, m, t){
+avgTestMethods <-function(n, m, t, numberOfMethod = 6){
   vec <- matrix( 
        nrow=t,              # number of rows 
-       ncol=4,              # number of columns 
+       ncol=numberOfMethod, # number of columns 
        byrow = TRUE)
   for( i in 1:t){
     vec[i,] <- testMethods(n, m)

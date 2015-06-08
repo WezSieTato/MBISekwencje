@@ -31,9 +31,9 @@ rabinakarpa_table <- function(s, w){
   Hw <- hash(w, m, c)
   Hs <- hash(s, m, c)
   for( i in 1:(n - m + 1)){
-    pLast <- utf8ToInt(s[i + m - 1])
-    pFirst <- utf8ToInt(s[i])
     if(i > 1){
+      pLast <- utf8ToInt(s[i + m-1])
+      pFirst <- utf8ToInt(s[i-1])
       Hs <- c * Hs - ( c^(m) * pFirst) + pLast;
     }
     if(Hs == Hw){
