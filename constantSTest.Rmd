@@ -1,0 +1,76 @@
+---
+title: "Wyszukiwanie ciagow znaków o zmiennej długości wzorca i stałej długości ciągu przeszukiwanego"
+output: html_document
+---
+
+```{r, echo=FALSE}
+source('test.r')
+```
+
+W tym dokumencie przedstawione są pomiary testów różnych algorytmów wyszukiwania ciągów znaków, dla różnych instancji problemu. Testy zostały przeprowadzone dla liczności zbioru przeszukiwanego wynoszącej odpowiednio 1000 oraz 10000, oraz dla długości wzorca wynoszącej odpowiednio 10, 50, 100, 300. Warto tutaj wspomnieć, że ze względu na problem opisany w 6.a, wzorzec jest odpowiednio długi aby zapewnić poprawność funkcji hasującej. Ilość powtórzeń dla każdego testu wynosi 300.
+
+Legenda:
+
+  *  "N-Table" - algorytm naiwny korzystający z wektorowej reprezantacji
+  *  "N-String" -  algorytm naiwny korzystający z ciągów znaków
+  *  "KMP" - algorytm Knutha Morissa Pratha (reprezentacja wektorowa)
+  *  "RK-String" - algorytm Rabina Karpa korzystająca preferowanej funkcji hashującej (reprezentacja ciąg znaków)
+  *  "RK-Table - algorytm Rabina Karpa korzystająca preferowanej funkcji hashującej (reprezentacja wektorowa)
+  *   "RK-sum hash" - algorytm Rabina Karpa korzystająca z bardzo kolizyjnej funkcji hashującej, która sumuje kody ASCII poszczególnych znaków (reprezentacja ciąg znaków)
+
+1. Długość przeszukiwanego ciągu 1000, długość szukanego ciągu 10:
+----------
+
+```{r, echo=FALSE}
+histTestMethods(1000, 10, 300);
+```
+
+2. Długość przeszukiwanego ciągu 1000, długość szukanego ciągu 50:
+----------
+
+```{r, echo=FALSE}
+histTestMethods(1000, 50, 300);
+```
+
+3. Długość przeszukiwanego ciągu 1000, długość szukanego ciągu 100:
+----------
+
+```{r, echo=FALSE}
+histTestMethods(1000, 100, 300);
+```
+
+
+4. Długość przeszukiwanego ciągu 1000, długość szukanego ciągu 300:
+----------
+
+```{r, echo=FALSE}
+histTestMethods(1000, 300, 300);
+```
+
+5. Długość przeszukiwanego ciągu 10000, długość szukanego ciągu 10:
+----------
+
+```{r, echo=FALSE}
+histTestMethods(10000, 10, 300);
+```
+
+6. Długość przeszukiwanego ciągu 10000, długość szukanego ciągu 50:
+----------
+
+```{r, echo=FALSE}
+histTestMethods(10000, 50, 300);
+```
+
+7. Długość przeszukiwanego ciągu 10000, długość szukanego ciągu 100:
+----------
+
+```{r, echo=FALSE}
+histTestMethods(10000, 100, 300);
+```
+
+8. Długość przeszukiwanego ciągu 10000, długość szukanego ciągu 200:
+----------
+
+```{r, echo=FALSE}
+histTestMethods(10000, 200, 300);
+```

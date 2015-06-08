@@ -1,5 +1,5 @@
 ---
-title: "Wyszukiwanie ciagow znaków o długości większe niż 100"
+title: "Wyszukiwanie ciagow znaków dla dużych długości ciągu wzorcowego"
 output: html_document
 ---
 
@@ -7,7 +7,7 @@ output: html_document
 source('test.r')
 ```
 
-W tym dokumencie przedstawione są pomiary testów algorytmu Knutha Morrisa Pratha i algorytmu nawiwnego wyszukiwania ciągów znaków, dla różnych instancji problemu. Wszystkie testy zostały przeprowadzone na wygenerowanych 100 próbkach. W tym dokumencie przeprowadzono testy poszukiwania ciągu o długości większej 100 znaków.
+W tym dokumencie przedstawione są pomiary testów algorytmu Knutha Morrisa Pratha i algorytmu nawiwnego wyszukiwania ciągów znaków, dla różnych instancji problemu. Wszystkie testy zostały przeprowadzone na wygenerowanych 300 próbkach (300 powtórzeń). W tym dokumencie przeprowadzono testy poszukiwania ciągu o długości większej 200 znaków. Celowo nie zostały użyte algorytmy Rabina-Karpa ze względu na problem opisany w 6.a.
 
 Legenda:
 
@@ -22,19 +22,26 @@ Legenda:
 ----------
 
 ```{r, echo=FALSE}
-histTestMethods(10000, 1000, 100, 3);
+histTestMethods(10000, 1000, 300, 3);
 ```
 
-2. Długość przeszukiwanego ciągu 10000, długość szukanego ciągu 5000:
+2. Długość przeszukiwanego ciągu 10000, długość szukanego ciągu 2500:
 ----------
 
 ```{r, echo=FALSE}
-histTestMethods(10000, 5000, 100, 3);
+histTestMethods(10000, 2500, 300, 3);
+```
+
+3. Długość przeszukiwanego ciągu 100000, długość szukanego ciągu 7500:
+----------
+
+```{r, echo=FALSE}
+histTestMethods(100000, 7500, 300, 3);
 ```
 
 3. Długość przeszukiwanego ciągu 100000, długość szukanego ciągu 10000:
 ----------
 
 ```{r, echo=FALSE}
-histTestMethods(100000, 10000, 100, 3);
+histTestMethods(100000, 10000, 300, 3);
 ```
